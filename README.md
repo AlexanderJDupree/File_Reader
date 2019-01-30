@@ -60,5 +60,5 @@ make clean
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/AlexanderJDupree/LinkedListsCPP/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://raw.githubusercontent.com/AlexanderJDupree/File_Reader/master/LICENSE) file for details
 
