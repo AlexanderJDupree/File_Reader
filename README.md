@@ -36,11 +36,10 @@ Note: The conditional 'if(reader && reader->contents)' must be checked before us
 
 This repo contains the source files for the file_reader utility, its unit tests, and an example program. To build the example run:
 
-'''
+```
 make
 ./example
-'''
-
+```
 To build and run unit tests:
 
 ```
