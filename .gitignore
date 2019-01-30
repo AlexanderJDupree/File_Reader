@@ -1,0 +1,4 @@
+*.swp
+*.o
+tests/obj/debug/run_tests
+
