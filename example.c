@@ -11,7 +11,7 @@
 
 #include "file_reader.h"
 
-#define DEFAULT_FILE "test.txt"
+#define DEFAULT_FILE "tests/test.txt"
 
 int main()
 {
@@ -24,7 +24,7 @@ int main()
     }
     else
     {
-        printf("\nFile: '%s' was not found or was empty\n", DEFAULT_FILE);
+        printf("File: '%s' was not found or was empty\n", DEFAULT_FILE);
     }
     close_reader(reader);
 
