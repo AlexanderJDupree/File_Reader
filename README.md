@@ -6,7 +6,7 @@
 
 ## Getting Started
 
-All releases are header only, meaning all you need to do is download the latest [release here] (TODO Add link), place the header into a visible include path, then include the file in your project. 
+All releases are header only, meaning all you need to do is download the latest [release here](https://github.com/AlexanderJDupree/File_Reader/releases), place the header into a visible include path, then include the file in your project. 
 
 ### Usage 
 
