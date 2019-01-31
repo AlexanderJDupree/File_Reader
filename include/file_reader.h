@@ -1,12 +1,14 @@
 /*
  * File: file_reader.h
  *
- * Brief:
+ * Brief: Simple file reader utility that provides an easy and intuitive way to 
+ *        load a file's contents into memory. 
  *
  * Author: Alexander DuPree
  *
- * Date: 24JAN2019
+ * https://github.com/AlexanderJDupree/File_Reader
  *
+ * Version: v0.0.1
  */
 
 #ifndef FILE_READER_H
