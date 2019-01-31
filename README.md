@@ -30,7 +30,7 @@ int main()
 }
 ```
 
-*Note*: The conditional **'if(reader && reader->contents)'** must be checked before using the reader. The ordering of the conditional is important as well. 'open_file()' will return a NULL reader if the file open operation failed, and the 'reader->contents' attribute will be NULL if the file was empty. It is also important to close the reader before the program exits otherwise there will be a memory leak. 
+*Note*: The conditional **'if(reader && reader->contents)'** must be checked before using the reader. The ordering of the conditional is important as well. **'open_file()'** will return a *NULL* reader if the file open operation failed, and the **'reader->contents'** attribute will be *NULL* if the file was empty. It is also important to close the reader before the program exits, otherwise there will be a memory leak. 
 
 ## What's in this Repo?
 
