@@ -8,17 +8,18 @@
  *
  * https://github.com/AlexanderJDupree/File_Reader
  *
- * Version: v0.0.1
+ * Version: v0.2-alpha
  */
 
 #ifndef FILE_READER_H
 #define FILE_READER_H
 
+#include <stddef.h>
 #include <stdio.h>
 
 struct File_Reader
 {
-    int size;
+    size_t size;
     FILE* file;
     const char* contents;
 };
