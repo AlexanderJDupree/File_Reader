@@ -1,5 +1,7 @@
 # File_Reader
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ecd9d77bad545f6b10e0dc37a7132c9)](https://app.codacy.com/app/AlexanderJDupree/File_Reader?utm_source=github.com&utm_medium=referral&utm_content=AlexanderJDupree/File_Reader&utm_campaign=Badge_Grade_Dashboard)
+
 ## Introduction
 
 **File_Reader** is a simple file utility written in C. The idea behind File_Reader is to provide a simple/intuitive way to load the contents of a file into memory. As such, the File_Reader utility does not provide much in the way of features at this moment. More features can and will likely be added to this utility as I experience the need for them.
