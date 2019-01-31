@@ -19,7 +19,7 @@ int main()
 
     if(reader && reader->contents)
     {
-        printf("File Size: %d bytes\n", reader->size);
+        printf("File Size: %ld bytes\n", reader->size);
         printf("%s", reader->contents);
     }
     else
