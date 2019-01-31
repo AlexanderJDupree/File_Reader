@@ -11,7 +11,7 @@
 
 #include "file_reader.h"
 
-#define DEFAULT_FILE "tests/test.txt"
+const char* DEFAULT_FILE = "tests/test.txt";
 
 int main()
 {
