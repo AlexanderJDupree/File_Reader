@@ -13,7 +13,7 @@ All releases are header only, meaning all you need to do is download the latest 
 ```c++
 #include "file_reader.h"
 
-#define DEFAULT_FILE "test.txt"
+const char* DEFAULT_FILE "path_to_file.txt"
 
 int main()
 {
