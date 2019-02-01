@@ -15,7 +15,7 @@ APPLICATION_OBJ := obj/example.o
 TARGET := example
 
 TEST_CC := g++
-TEST_FLAGS := $(CFLAGS) -D UNIT_TESTS
+TEST_FLAGS := $(CFLAGS)
 TEST_INCLUDE := $(INCLUDE) -I tests/third_party
 
 TEST_DIR := tests
