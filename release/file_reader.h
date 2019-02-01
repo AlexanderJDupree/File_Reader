@@ -8,12 +8,13 @@
  *
  * https://github.com/AlexanderJDupree/File_Reader
  *
- * Version: v0.2-alpha
+ * Version: v0.3-alpha
  */
 
 #ifndef FILE_READER_H
 #define FILE_READER_H
 
+#include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
 
@@ -30,7 +31,7 @@ void close_reader(struct File_Reader* reader);
 
 const char* read_file(struct File_Reader* reader);
 
-long file_size(FILE* file);
+size_t file_size(FILE* file);
 
 /*
  * File: file_reader.c
@@ -39,8 +40,6 @@ long file_size(FILE* file);
  *
  * https://github.com/AlexanderJDupree/File_Reader
  */
-
-#include <stdlib.h>
 
 struct File_Reader* open_file(const char* file_name)
 {
@@ -84,7 +83,7 @@ const char* read_file(struct File_Reader* reader)
 
         // grab character from stream, store it into contents. Ensure it isn't
         // EOF char and ensure we don't write past the buffer size
-        int i = 0;
+        size_t i = 0;
         while( i < reader->size && (*(contents + i++) = fgetc(reader->file)) != EOF)
 
         *(contents + i) = '\0'; // Add null terminator to the end of string
@@ -92,9 +91,9 @@ const char* read_file(struct File_Reader* reader)
     return contents;
 }
 
-long file_size(FILE* file)
+size_t file_size(FILE* file)
 {
-    long size = -1;
+    size_t size = 0;
 
     if(file)
     {
