@@ -25,11 +25,12 @@ struct File_Reader
 };
 
 struct File_Reader* open_file(const char* file_name);
+
 void close_reader(struct File_Reader* reader);
 
 const char* read_file(struct File_Reader* reader);
 
-long file_size(FILE* file);
+size_t file_size(FILE* file);
 
 #endif
 

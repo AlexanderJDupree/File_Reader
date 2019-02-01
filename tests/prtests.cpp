@@ -14,12 +14,12 @@
 #include <string.h>
 #include <catch.hpp>
 
-#define TEST_FILE "tests/test.txt"
-#define EMPTY_FILE "tests/empty.txt"
-
 extern "C" {
     #include "file_reader.h"
 }
+
+const char* TEST_FILE = "tests/test.txt";
+const char* EMPTY_FILE = "tests/empty.txt";
 
 TEST_CASE("Determining a file size in bytes")
 {
@@ -32,7 +32,7 @@ TEST_CASE("Determining a file size in bytes")
     }
     SECTION("Invalid file")
     {
-        REQUIRE(file_size(NULL) == -1);
+        REQUIRE(file_size(NULL) == 0);
     }
     SECTION("empty_file")
     {
@@ -46,6 +46,7 @@ TEST_CASE("Reading a file into a char buffer")
 {
     struct File_Reader* reader = open_file(TEST_FILE);
     struct File_Reader* invalid_file = open_file("not a file");
+    struct File_Reader* empty_reader = open_file(EMPTY_FILE);
 
     SECTION("Read a valid file")
     {
@@ -56,6 +57,10 @@ TEST_CASE("Reading a file into a char buffer")
     SECTION("Read invalid file")
     {
         REQUIRE(read_file(invalid_file) == NULL);
+    }
+    SECTION("Read empty file")
+    {
+        REQUIRE(empty_reader->contents == NULL);
     }
     close_reader(reader);
     // Pointer for invalid_file never gets allocated. thus close_reader isn't needed
