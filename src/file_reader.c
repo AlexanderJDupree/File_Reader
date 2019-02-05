@@ -9,14 +9,14 @@
 #include <stdlib.h>
 #include "file_reader.h"
 
-struct File_Reader* open_file(const char* file_name)
+File_Reader* open_file(const char* file_name)
 {
     FILE* file = fopen(file_name, "r");
-    struct File_Reader* reader = NULL;
+    File_Reader* reader = NULL;
 
     if(file)  // if fopen failed, don't allocate and return NULL
     {
-        reader = (struct File_Reader*) malloc(sizeof(struct File_Reader));
+        reader = (File_Reader*) malloc(sizeof(File_Reader));
 
         reader->file = file;
         reader->size = file_size(file);
@@ -27,7 +27,7 @@ struct File_Reader* open_file(const char* file_name)
     return reader;
 }
 
-void close_reader(struct File_Reader* reader)
+void close_reader(File_Reader* reader)
 {
     if(reader)
     {
@@ -42,7 +42,7 @@ void close_reader(struct File_Reader* reader)
     return;
 }
 
-const char* read_file(struct File_Reader* reader)
+const char* read_file(File_Reader* reader)
 {
     char* contents = NULL;
     if(reader && reader->size != 0)

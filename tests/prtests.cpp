@@ -23,8 +23,8 @@ const char* EMPTY_FILE = "tests/empty.txt";
 
 TEST_CASE("Determining a file size in bytes")
 {
-    struct File_Reader* reader = open_file(TEST_FILE);
-    struct File_Reader* empty_file = open_file(EMPTY_FILE);
+    File_Reader* reader = open_file(TEST_FILE);
+    File_Reader* empty_file = open_file(EMPTY_FILE);
 
     SECTION("test.txt size")
     {
@@ -44,9 +44,9 @@ TEST_CASE("Determining a file size in bytes")
 
 TEST_CASE("Reading a file into a char buffer")
 {
-    struct File_Reader* reader = open_file(TEST_FILE);
-    struct File_Reader* invalid_file = open_file("not a file");
-    struct File_Reader* empty_reader = open_file(EMPTY_FILE);
+    File_Reader* reader = open_file(TEST_FILE);
+    File_Reader* invalid_file = open_file("not a file");
+    File_Reader* empty_reader = open_file(EMPTY_FILE);
 
     SECTION("Read a valid file")
     {

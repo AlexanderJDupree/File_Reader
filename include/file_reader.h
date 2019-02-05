@@ -8,7 +8,6 @@
  *
  * https://github.com/AlexanderJDupree/File_Reader
  *
- * Version: v0.0.1
  */
 
 #ifndef FILE_READER_H
@@ -17,18 +16,18 @@
 #include <stddef.h>
 #include <stdio.h>
 
-struct File_Reader
+typedef struct
 {
     size_t size;
     FILE* file;
     const char* contents;
-};
+} File_Reader;
 
-struct File_Reader* open_file(const char* file_name);
+File_Reader* open_file(const char* file_name);
 
-void close_reader(struct File_Reader* reader);
+void close_reader(File_Reader* reader);
 
-const char* read_file(struct File_Reader* reader);
+const char* read_file(File_Reader* reader);
 
 size_t file_size(FILE* file);
 

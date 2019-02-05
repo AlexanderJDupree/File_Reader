@@ -15,7 +15,7 @@ const char* DEFAULT_FILE = "tests/test.txt";
 
 int main()
 {
-    struct File_Reader* reader = open_file(DEFAULT_FILE);
+    File_Reader* reader = open_file(DEFAULT_FILE);
 
     if(reader && reader->contents)
     {
