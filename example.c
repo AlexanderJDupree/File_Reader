@@ -15,18 +15,19 @@ const char* DEFAULT_FILE = "tests/test.txt";
 
 int main()
 {
-    File_Reader* reader = open_file(DEFAULT_FILE);
+    File_Reader reader = open_file(DEFAULT_FILE);
 
-    if(reader && reader->contents)
+    if(reader.contents) 
     {
-        printf("File Size: %ld bytes\n", reader->size);
-        printf("%s", reader->contents);
+        printf("File Size: %ld bytes\n", reader.size);
+        printf("%s", reader.contents);
     }
     else
     {
         printf("File: '%s' was not found or was empty\n", DEFAULT_FILE);
     }
-    close_reader(reader);
+    
+    close_reader(&reader);
 
     return 0;
 }

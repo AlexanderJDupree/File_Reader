@@ -8,7 +8,7 @@
  *
  * https://github.com/AlexanderJDupree/File_Reader
  *
- * Version: v0.3-alpha
+ * Version: v0.1.0-alpha
  */
 
 #ifndef FILE_READER_H
@@ -20,12 +20,12 @@
 
 typedef struct
 {
-    size_t size;
     FILE* file;
+    size_t size;
     const char* contents;
 } File_Reader;
 
-File_Reader* open_file(const char* file_name);
+File_Reader open_file(const char* file_name);
 
 void close_reader(File_Reader* reader);
 
@@ -41,21 +41,17 @@ size_t file_size(FILE* file);
  * https://github.com/AlexanderJDupree/File_Reader
  */
 
-File_Reader* open_file(const char* file_name)
+File_Reader open_file(const char* file_name)
 {
     FILE* file = fopen(file_name, "r");
-    File_Reader* reader = NULL;
+    File_Reader reader = { .file = file, .size = 0, .contents = NULL };
 
-    if(file)  // if fopen failed, don't allocate and return NULL
+    if(file)  // if fopen was successfull, parse the file
     {
-        reader = (File_Reader*) malloc(sizeof(File_Reader));
+        reader.size = file_size(file);
 
-        reader->file = file;
-        reader->size = file_size(file);
-
-        reader->contents = read_file(reader);
+        reader.contents = read_file(&reader);
     }
-
     return reader;
 }
 
@@ -64,12 +60,13 @@ void close_reader(File_Reader* reader)
     if(reader)
     {
         free((char*)reader->contents);
+        reader->contents = NULL;
         if(reader->file)
         {
             fclose(reader->file);
+            reader->file = NULL;
         }
-        free(reader);
-        reader = NULL;
+        reader->size = 0;
     }
     return;
 }
