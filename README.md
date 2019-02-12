@@ -14,24 +14,26 @@ All releases are header only, meaning all you need to do is download the latest 
 ```c++
 #include "file_reader.h"
 
-const char* DEFAULT_FILE "path_to_file.txt"
+const char* DEFAULT_FILE = "test.txt";
 
 int main()
 {
-    struct File_Reader* reader = open_file(DEFAULT_FILE);
+    File_Reader reader = open_file(DEFAULT_FILE);
 
-    if(reader && reader->contents)
+    if(reader.contents) 
     {
-        printf("File Size: %ld bytes\n", reader->size);
-        printf("%s", reader->contents);
+        printf("File Size: %ld bytes\n", reader.size);
+        printf("%s", reader.contents);
     }
-    close_reader(reader);
+    
+    close_reader(&reader);
 
     return 0;
 }
+
 ```
 
-*Note*: The conditional **'if(reader && reader->contents)'** must be checked before using the reader. The ordering of the conditional is important as well. **'open_file()'** will return a *NULL* reader if the file open operation failed, and the **'reader->contents'** attribute will be *NULL* if the file was empty. It is also important to close the reader before the program exits, otherwise there will be a memory leak. 
+*Note*: The conditional **'if(reader.contents)'** must be checked before using the reader. If **'open_file()'** fails the reader returned will have its contents pointed to *NULL* and the size attribute set to 0. The **'reader.contents'** attribute will also be *NULL* if the file was empty. It is important to close the reader before the program exits, otherwise there will be a memory leak.
 
 ## What's in this Repo?
 
