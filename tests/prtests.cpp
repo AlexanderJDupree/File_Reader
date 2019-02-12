@@ -23,12 +23,12 @@ const char* EMPTY_FILE = "tests/empty.txt";
 
 TEST_CASE("Determining a file size in bytes")
 {
-    File_Reader* reader = open_file(TEST_FILE);
-    File_Reader* empty_file = open_file(EMPTY_FILE);
+    File_Reader reader = open_file(TEST_FILE);
+    File_Reader empty_file = open_file(EMPTY_FILE);
 
     SECTION("test.txt size")
     {
-        REQUIRE(file_size(reader->file) == 22);
+        REQUIRE(file_size(reader.file) == 22);
     }
     SECTION("Invalid file")
     {
@@ -36,33 +36,34 @@ TEST_CASE("Determining a file size in bytes")
     }
     SECTION("empty_file")
     {
-        REQUIRE(file_size(empty_file->file) == 0);
+        REQUIRE(file_size(empty_file.file) == 0);
     }
-    close_reader(reader);
-    close_reader(empty_file);
+    close_reader(&reader);
+    close_reader(&empty_file);
 }
 
 TEST_CASE("Reading a file into a char buffer")
 {
-    File_Reader* reader = open_file(TEST_FILE);
-    File_Reader* invalid_file = open_file("not a file");
-    File_Reader* empty_reader = open_file(EMPTY_FILE);
+    File_Reader reader = open_file(TEST_FILE);
+    File_Reader invalid_file = open_file("not a file");
+    File_Reader empty_reader = open_file(EMPTY_FILE);
 
     SECTION("Read a valid file")
     {
         const char* test_contents = "Hello World\nI am Alex\n";
 
-        REQUIRE(strcmp(reader->contents, test_contents)== 0);
+        REQUIRE(strcmp(reader.contents, test_contents)== 0);
     }
     SECTION("Read invalid file")
     {
-        REQUIRE(read_file(invalid_file) == NULL);
+        REQUIRE(read_file(&invalid_file) == NULL);
     }
     SECTION("Read empty file")
     {
-        REQUIRE(empty_reader->contents == NULL);
+        REQUIRE(empty_reader.contents == NULL);
     }
-    close_reader(reader);
+    close_reader(&reader);
+    close_reader(&empty_reader);
     // Pointer for invalid_file never gets allocated. thus close_reader isn't needed
 }
 
