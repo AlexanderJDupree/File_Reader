@@ -47,6 +47,7 @@ TEST_CASE("Reading a file into a char buffer")
     File_Reader reader = open_file(TEST_FILE);
     File_Reader invalid_file = open_file("not a file");
     File_Reader empty_reader = open_file(EMPTY_FILE);
+    File_Reader directory = open_file(".");
 
     SECTION("Read a valid file")
     {
@@ -61,6 +62,11 @@ TEST_CASE("Reading a file into a char buffer")
     SECTION("Read empty file")
     {
         REQUIRE(empty_reader.contents == NULL);
+    }
+    SECTION("Directories do not open file reader")
+    {
+        REQUIRE(directory.contents == NULL);
+        REQUIRE(directory.file == NULL);
     }
     close_reader(&reader);
     close_reader(&empty_reader);
