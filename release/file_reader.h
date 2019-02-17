@@ -8,15 +8,16 @@
  *
  * https://github.com/AlexanderJDupree/File_Reader
  *
- * Version: v0.1.0-alpha
+ * Version: v0.1.1-alpha
  */
 
 #ifndef FILE_READER_H
 #define FILE_READER_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include <stdio.h>
+#include <sys/stat.h>
 
 typedef struct
 {
@@ -25,7 +26,9 @@ typedef struct
     const char* contents;
 } File_Reader;
 
-File_Reader open_file(const char* file_name);
+int is_file(const char* file_path);
+
+File_Reader open_file(const char* file_path);
 
 void close_reader(File_Reader* reader);
 
@@ -41,9 +44,15 @@ size_t file_size(FILE* file);
  * https://github.com/AlexanderJDupree/File_Reader
  */
 
-File_Reader open_file(const char* file_name)
+int is_file(const char* file_path)
 {
-    FILE* file = fopen(file_name, "r");
+    struct stat path_stat;
+    return (lstat(file_path, &path_stat) == 0) ? S_ISREG(path_stat.st_mode) : 0;
+}
+
+File_Reader open_file(const char* file_path)
+{
+    FILE* file = (is_file(file_path)) ? fopen(file_path, "r") : NULL;
     File_Reader reader = { .file = file, .size = 0, .contents = NULL };
 
     if(file)  // if fopen was successfull, parse the file
@@ -102,6 +111,5 @@ size_t file_size(FILE* file)
     }
     return size;
 }
-
 #endif
 
