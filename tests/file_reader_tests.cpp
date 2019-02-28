@@ -18,19 +18,22 @@ extern "C" {
     #include "file_reader.h"
 }
 
-const char* TEST_FILE = "tests/test.txt";
-const char* EMPTY_FILE = "tests/empty.txt";
+const char* TEST_FILE = "../tests/test.txt";
+const char* EMPTY_FILE = "../tests/empty.txt";
 
 TEST_CASE("Determining a file size in bytes")
 {
     File_Reader reader = open_file(TEST_FILE);
     File_Reader empty_file = open_file(EMPTY_FILE);
 
+    REQUIRE(reader.contents != NULL);
+    REQUIRE(empty_file.contents == NULL);
+
     SECTION("test.txt size")
     {
         REQUIRE(file_size(reader.file) == 22);
     }
-    SECTION("Invalid file")
+    SECTION("NULL passed in as parameter returns 0")
     {
         REQUIRE(file_size(NULL) == 0);
     }

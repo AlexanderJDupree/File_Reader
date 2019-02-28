@@ -1,10 +1,9 @@
 # vim swap files
 *.swp
 
-# Object files
+# Object files and Binaries
 *.o
+gmake/obj/
+bin/
 
-# Executables
-tests/obj/debug/run_tests
-example
 
