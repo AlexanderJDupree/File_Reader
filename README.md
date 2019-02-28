@@ -37,29 +37,26 @@ int main()
 
 ## What's in this Repo?
 
-This repo contains the source files for the file_reader utility, its unit tests, and an example program. To build the example run:
+This repo utilizes [Premake5](https://github.com/premake/premake-core) to build the project. Included along with the source files are unit tests, an example program, and the generated GNU makefiles. If you need specific files (i.e. visual studio or xcode) just run:
 
 ```
-make
-./example
+premake5 <action>
 ```
-To build and run unit tests:
+
+where <action> is the type of project files needed. See the [Premake5](https://github.com/premake/premake-core) documenation for furhter usage instructions.
+
+If the GNU makefiles suffice, then you can generate a File_Reader static library and unit tests by running:
 
 ```
-make tests
-./tests/obj/debug/run_tests
+cd gamke && make
 ```
-*Note*: running 'make tests' for the first time will take some time as it has to compile the unit testing framework used. 
 
-To remove object files run:
-
-```
-make clean
-```
+I've included a postbuild command in premake5.lua that will run the unit tests automatically, however if you want to rerun the tests they are located in bin/tests/.
 
 ## Built With
 
 * [Catch2](https://github.com/catchorg/Catch2) - Unit Testing framework used
+* [Premake5](https://github.com/premake/premake-core) - Build system
 
 ## License
 
