@@ -37,7 +37,7 @@ int main()
 
 ## What's in this Repo?
 
-This repo utilizes [Premake5](https://github.com/premake/premake-core) to build the project. Included along with the source files are unit tests, an example program, and the generated GNU makefiles. If you need specific files (i.e. visual studio or xcode) just run:
+This repo utilizes [Premake5](https://github.com/premake/premake-core) to build the necessary project files. Included along with the source files are unit tests, an example program, and the generated GNU makefiles. If you need specific project files (i.e. visual studio or xcode) just run:
 
 ```
 premake5 <action>
@@ -48,7 +48,7 @@ where <action> is the type of project files needed. See the [Premake5](https://g
 If the GNU makefiles suffice, then you can generate a File_Reader static library and unit tests by running:
 
 ```
-cd gamke && make
+cd gmake && make
 ```
 
 I've included a postbuild command in premake5.lua that will run the unit tests automatically, however if you want to rerun the tests they are located in bin/tests/.
