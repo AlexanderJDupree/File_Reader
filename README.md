@@ -48,7 +48,7 @@ where <action> is the type of project files needed. See the [Premake5](https://g
 If the GNU makefiles suffice, then you can generate a File_Reader static library and unit tests by running:
 
 ```
-cd gamke && make
+cd gmake && make
 ```
 
 I've included a postbuild command in premake5.lua that will run the unit tests automatically, however if you want to rerun the tests they are located in bin/tests/.
