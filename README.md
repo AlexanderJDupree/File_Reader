@@ -37,7 +37,7 @@ int main()
 
 ## What's in this Repo?
 
-This repo utilizes [Premake5](https://github.com/premake/premake-core) to build the project. Included along with the source files are unit tests, an example program, and the generated GNU makefiles. If you need specific files (i.e. visual studio or xcode) just run:
+This repo utilizes [Premake5](https://github.com/premake/premake-core) to build the necessary project files. Included along with the source files are unit tests, an example program, and the generated GNU makefiles. If you need specific project files (i.e. visual studio or xcode) just run:
 
 ```
 premake5 <action>
