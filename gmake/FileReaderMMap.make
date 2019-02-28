@@ -12,7 +12,7 @@ endif
 
 ifeq ($(config),debug_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/Debug/mmap
+  TARGETDIR = ../bin/Debug
   TARGET = $(TARGETDIR)/libFileReaderMMap.a
   OBJDIR = obj/POSIX_x64/Debug/FileReaderMMap
   DEFINES += -DDEBUG -DPOSIX_MMAP
@@ -39,7 +39,7 @@ endif
 
 ifeq ($(config),release_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/Release/mmap
+  TARGETDIR = ../bin/Release
   TARGET = $(TARGETDIR)/libFileReaderMMap.a
   OBJDIR = obj/POSIX_x64/Release/FileReaderMMap
   DEFINES += -DNDEBUG -DPOSIX_MMAP

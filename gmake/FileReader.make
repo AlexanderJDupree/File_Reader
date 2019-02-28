@@ -12,7 +12,7 @@ endif
 
 ifeq ($(config),debug_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/Debug/stream
+  TARGETDIR = ../bin/Debug
   TARGET = $(TARGETDIR)/libFileReader.a
   OBJDIR = obj/POSIX_x64/Debug/FileReader
   DEFINES += -DDEBUG
@@ -39,7 +39,7 @@ endif
 
 ifeq ($(config),debug_win64)
   RESCOMP = windres
-  TARGETDIR = ../bin/Debug/stream
+  TARGETDIR = ../bin/Debug
   TARGET = $(TARGETDIR)/FileReader.lib
   OBJDIR = obj/win64/Debug/FileReader
   DEFINES += -DDEBUG
@@ -66,7 +66,7 @@ endif
 
 ifeq ($(config),release_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/Release/stream
+  TARGETDIR = ../bin/Release
   TARGET = $(TARGETDIR)/libFileReader.a
   OBJDIR = obj/POSIX_x64/Release/FileReader
   DEFINES += -DNDEBUG
@@ -93,7 +93,7 @@ endif
 
 ifeq ($(config),release_win64)
   RESCOMP = windres
-  TARGETDIR = ../bin/Release/stream
+  TARGETDIR = ../bin/Release
   TARGET = $(TARGETDIR)/FileReader.lib
   OBJDIR = obj/win64/Release/FileReader
   DEFINES += -DNDEBUG

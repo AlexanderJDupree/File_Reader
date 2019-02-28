@@ -40,7 +40,7 @@ workspace "File_Reader"
 project "FileReader"
     kind "StaticLib"
     language "C"
-    targetdir "bin/%{cfg.buildcfg}/stream/"
+    targetdir "bin/%{cfg.buildcfg}"
     targetname "FileReader"
 
     local source = "src/"
@@ -52,7 +52,7 @@ project "FileReader"
 project "FileReaderMMap"
     kind "StaticLib"
     language "C"
-    targetdir "bin/%{cfg.buildcfg}/mmap/"
+    targetdir "bin/%{cfg.buildcfg}"
     targetname "FileReaderMMap"
     removeplatforms { "win64"}
     defines { "POSIX_MMAP" }

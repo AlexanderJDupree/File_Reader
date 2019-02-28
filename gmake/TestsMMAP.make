@@ -22,8 +22,8 @@ ifeq ($(config),debug_posix_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Debug/mmap/libFileReaderMMap.a
-  LDDEPS += ../bin/Debug/mmap/libFileReaderMMap.a
+  LIBS += ../bin/Debug/libFileReaderMMap.a
+  LDDEPS += ../bin/Debug/libFileReaderMMap.a
   ALL_LDFLAGS += $(LDFLAGS)
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -80,8 +80,8 @@ ifeq ($(config),release_posix_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Release/mmap/libFileReaderMMap.a
-  LDDEPS += ../bin/Release/mmap/libFileReaderMMap.a
+  LIBS += ../bin/Release/libFileReaderMMap.a
+  LDDEPS += ../bin/Release/libFileReaderMMap.a
   ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS

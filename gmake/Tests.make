@@ -22,8 +22,8 @@ ifeq ($(config),debug_posix_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Debug/stream/libFileReader.a
-  LDDEPS += ../bin/Debug/stream/libFileReader.a
+  LIBS += ../bin/Debug/libFileReader.a
+  LDDEPS += ../bin/Debug/libFileReader.a
   ALL_LDFLAGS += $(LDFLAGS)
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -51,8 +51,8 @@ ifeq ($(config),debug_win64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Debug/stream/FileReader.lib
-  LDDEPS += ../bin/Debug/stream/FileReader.lib
+  LIBS += ../bin/Debug/FileReader.lib
+  LDDEPS += ../bin/Debug/FileReader.lib
   ALL_LDFLAGS += $(LDFLAGS)
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -80,8 +80,8 @@ ifeq ($(config),release_posix_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Release/stream/libFileReader.a
-  LDDEPS += ../bin/Release/stream/libFileReader.a
+  LIBS += ../bin/Release/libFileReader.a
+  LDDEPS += ../bin/Release/libFileReader.a
   ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -109,8 +109,8 @@ ifeq ($(config),release_win64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Release/stream/FileReader.lib
-  LDDEPS += ../bin/Release/stream/FileReader.lib
+  LIBS += ../bin/Release/FileReader.lib
+  LDDEPS += ../bin/Release/FileReader.lib
   ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
