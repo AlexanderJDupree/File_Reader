@@ -12,25 +12,23 @@
 #ifndef FILE_READER_H
 #define FILE_READER_H
 
-#include <stddef.h>
 #include <stdio.h>
+#include <stddef.h>
 
-typedef struct
+typedef struct File_Reader
 {
-    FILE* file;
-    size_t size;
     const char* contents;
+    size_t size;
 } File_Reader;
 
 int is_file(const char* file_path);
 
 File_Reader open_file(const char* file_path);
 
-void close_reader(File_Reader* reader);
+int close_reader(File_Reader* reader);
 
-const char* read_file(File_Reader* reader);
-
-size_t file_size(FILE* file);
+// Uses file stream and fseek to determine file size
+size_t get_size(FILE* file);
 
 #endif
 

@@ -12,47 +12,20 @@ endif
 
 ifeq ($(config),debug_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example
-  OBJDIR = obj/POSIX_x64/Debug/Example
-  DEFINES += -DDEBUG
+  TARGETDIR = ../bin/Debug/mmap
+  TARGET = $(TARGETDIR)/libFileReaderMMap.a
+  OBJDIR = obj/POSIX_x64/Debug/FileReaderMMap
+  DEFINES += -DDEBUG -DPOSIX_MMAP
   INCLUDES += -I../include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Debug/mmap/libFileReaderMMap.a
-  LDDEPS += ../bin/Debug/mmap/libFileReaderMMap.a
-  ALL_LDFLAGS += $(LDFLAGS)
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-all: prebuild prelink $(TARGET)
-	@:
-
-endif
-
-ifeq ($(config),debug_win64)
-  RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example.exe
-  OBJDIR = obj/win64/Debug/Example
-  DEFINES += -DDEBUG
-  INCLUDES += -I../include
-  FORCE_INCLUDE +=
-  ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror
-  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS)
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -66,47 +39,20 @@ endif
 
 ifeq ($(config),release_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example
-  OBJDIR = obj/POSIX_x64/Release/Example
-  DEFINES += -DNDEBUG
+  TARGETDIR = ../bin/Release/mmap
+  TARGET = $(TARGETDIR)/libFileReaderMMap.a
+  OBJDIR = obj/POSIX_x64/Release/FileReaderMMap
+  DEFINES += -DNDEBUG -DPOSIX_MMAP
   INCLUDES += -I../include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Release/mmap/libFileReaderMMap.a
-  LDDEPS += ../bin/Release/mmap/libFileReaderMMap.a
-  ALL_LDFLAGS += $(LDFLAGS) -s
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
-  define PREBUILDCMDS
-  endef
-  define PRELINKCMDS
-  endef
-  define POSTBUILDCMDS
-  endef
-all: prebuild prelink $(TARGET)
-	@:
-
-endif
-
-ifeq ($(config),release_win64)
-  RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example.exe
-  OBJDIR = obj/win64/Release/Example
-  DEFINES += -DNDEBUG
-  INCLUDES += -I../include
-  FORCE_INCLUDE +=
-  ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror
-  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -s
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -119,7 +65,7 @@ all: prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/example.o \
+	$(OBJDIR)/file_reader.o \
 
 RESOURCES := \
 
@@ -131,7 +77,7 @@ ifeq (.exe,$(findstring .exe,$(ComSpec)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES) | $(TARGETDIR)
-	@echo Linking Example
+	@echo Linking FileReaderMMap
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -154,7 +100,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Example
+	@echo Cleaning FileReaderMMap
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -173,14 +119,14 @@ ifneq (,$(PCH))
 $(OBJECTS): $(GCH) $(PCH) | $(OBJDIR)
 $(GCH): $(PCH) | $(OBJDIR)
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+	$(SILENT) $(CC) -x c-header $(ALL_CFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 else
 $(OBJECTS): | $(OBJDIR)
 endif
 
-$(OBJDIR)/example.o: ../src/example.cpp
+$(OBJDIR)/file_reader.o: ../src/file_reader.c
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

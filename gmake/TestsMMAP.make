@@ -12,15 +12,15 @@ endif
 
 ifeq ($(config),debug_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example
-  OBJDIR = obj/POSIX_x64/Debug/Example
+  TARGETDIR = ../bin/tests
+  TARGET = $(TARGETDIR)/test_debug_posix_x64_MMap
+  OBJDIR = obj/POSIX_x64/Debug/TestsMMAP
   DEFINES += -DDEBUG
-  INCLUDES += -I../include
+  INCLUDES += -I../third_party -I../include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror -std=c++11
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += ../bin/Debug/mmap/libFileReaderMMap.a
   LDDEPS += ../bin/Debug/mmap/libFileReaderMMap.a
@@ -31,6 +31,8 @@ ifeq ($(config),debug_posix_x64)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running postbuild commands
+	.././bin/tests/test_debug_posix_x64_MMap
   endef
 all: prebuild prelink $(TARGET)
 	@:
@@ -39,15 +41,15 @@ endif
 
 ifeq ($(config),debug_win64)
   RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example.exe
-  OBJDIR = obj/win64/Debug/Example
+  TARGETDIR = ../bin/tests
+  TARGET = $(TARGETDIR)/test_debug_win64_MMap.exe
+  OBJDIR = obj/win64/Debug/TestsMMAP
   DEFINES += -DDEBUG
-  INCLUDES += -I../include
+  INCLUDES += -I../third_party -I../include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror -std=c++11
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -g -Wall -Wextra -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
@@ -58,6 +60,8 @@ ifeq ($(config),debug_win64)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running postbuild commands
+	.././bin/tests/test_debug_win64_MMap
   endef
 all: prebuild prelink $(TARGET)
 	@:
@@ -66,15 +70,15 @@ endif
 
 ifeq ($(config),release_posix_x64)
   RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example
-  OBJDIR = obj/POSIX_x64/Release/Example
+  TARGETDIR = ../bin/tests
+  TARGET = $(TARGETDIR)/test_release_posix_x64_MMap
+  OBJDIR = obj/POSIX_x64/Release/TestsMMAP
   DEFINES += -DNDEBUG
-  INCLUDES += -I../include
+  INCLUDES += -I../third_party -I../include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror -std=c++11
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += ../bin/Release/mmap/libFileReaderMMap.a
   LDDEPS += ../bin/Release/mmap/libFileReaderMMap.a
@@ -85,6 +89,8 @@ ifeq ($(config),release_posix_x64)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running postbuild commands
+	.././bin/tests/test_release_posix_x64_MMap
   endef
 all: prebuild prelink $(TARGET)
 	@:
@@ -93,15 +99,15 @@ endif
 
 ifeq ($(config),release_win64)
   RESCOMP = windres
-  TARGETDIR = ../bin/example
-  TARGET = $(TARGETDIR)/example.exe
-  OBJDIR = obj/win64/Release/Example
+  TARGETDIR = ../bin/tests
+  TARGET = $(TARGETDIR)/test_release_win64_MMap.exe
+  OBJDIR = obj/win64/Release/TestsMMAP
   DEFINES += -DNDEBUG
-  INCLUDES += -I../include
+  INCLUDES += -I../third_party -I../include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror -std=c++11
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Werror -O2 -Wall -Wextra -Wall -Wextra -Werror -std=c++11
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
@@ -112,6 +118,8 @@ ifeq ($(config),release_win64)
   define PRELINKCMDS
   endef
   define POSTBUILDCMDS
+	@echo Running postbuild commands
+	.././bin/tests/test_release_win64_MMap
   endef
 all: prebuild prelink $(TARGET)
 	@:
@@ -119,7 +127,8 @@ all: prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/example.o \
+	$(OBJDIR)/file_reader_tests.o \
+	$(OBJDIR)/test_config_main.o \
 
 RESOURCES := \
 
@@ -131,7 +140,7 @@ ifeq (.exe,$(findstring .exe,$(ComSpec)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES) | $(TARGETDIR)
-	@echo Linking Example
+	@echo Linking TestsMMAP
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -154,7 +163,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Example
+	@echo Cleaning TestsMMAP
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -178,7 +187,10 @@ else
 $(OBJECTS): | $(OBJDIR)
 endif
 
-$(OBJDIR)/example.o: ../src/example.cpp
+$(OBJDIR)/file_reader_tests.o: ../tests/file_reader_tests.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/test_config_main.o: ../tests/test_config_main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

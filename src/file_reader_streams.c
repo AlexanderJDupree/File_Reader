@@ -1,5 +1,5 @@
 /*
- * File: file_reader.c
+ * File: file_reader_streams.c
  *
  * Author: Alexander DuPree
  *
@@ -10,68 +10,8 @@
 #include <sys/stat.h>
 #include "file_reader.h"
 
-int is_file(const char* file_path)
-{
-    struct stat path_stat;
-    return (lstat(file_path, &path_stat) == 0) ? S_ISREG(path_stat.st_mode) : 0;
-}
-
-size_t get_size(FILE* file)
-{
-    size_t size = 0;
-
-    if(file)
-    {
-        fseek(file, 0L, SEEK_END);
-
-        size = ftell(file);
-
-        fseek(file, 0L, SEEK_SET);
-    }
-    return size;
-}
-
-#ifdef POSIX_MMAP
-
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/mman.h>
-#include <sys/types.h>
-
-File_Reader open_file(const char* file_path)
-{
-    struct stat st;
-    char* buffer = NULL;
-    int fd = open(file_path, O_RDONLY);
-
-    if(fd != -1 && fstat(fd, &st) == 0 && S_ISREG(st.st_mode))
-    {
-        buffer = (st.st_size > 0) ? 
-            (char*) mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0) : NULL;
-        close(fd);
-    }
-
-    File_Reader reader = { 
-        .contents = (buffer != (void*)-1) ? buffer : NULL, 
-        .size = (buffer != NULL) ? (size_t) st.st_size : 0
-    };
-    return reader;
-}
-
-int close_reader(File_Reader* reader)
-{
-    if(reader && reader->contents)
-    {
-        void* mapped_memory = (void*) reader->contents;
-
-        reader->contents = NULL;
-
-        return munmap(mapped_memory, reader->size);
-    }
-    return 0;
-}
-
-#else
+extern size_t get_size(FILE* file);
+extern int is_file(const char* file_path);
 
 static const char* load_file_contents(FILE* file, size_t size)
 {
@@ -118,6 +58,4 @@ int close_reader(File_Reader* reader)
     }
     return 0;
 }
-
-#endif // POSIX_MMAP
 

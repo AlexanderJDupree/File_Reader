@@ -8,6 +8,7 @@
 -- WORKSPACE CONFIGURATION --
 workspace "File_Reader"
     configurations { "Debug", "Release" }
+    platforms { "POSIX_x64", "win64" }
 
     local project_action = "UNDEFINED"
     if _ACTION ~= nill then project_action = _ACTION end
@@ -19,6 +20,9 @@ workspace "File_Reader"
 
     -- PLATFORM CONFIGURATIONS --
     
+    filter { "platforms:win64" }
+        system "Windows"
+
     -- COMPILER/LINKER CONFIG --
     flags "FatalWarnings"
     warnings "Extra"
@@ -33,47 +37,83 @@ workspace "File_Reader"
 
     filter {} -- close filter
 
-project "File_Reader"
+project "FileReader"
     kind "StaticLib"
     language "C"
-    targetdir "bin/%{cfg.buildcfg}"
-    targetname "File_Reader"
+    targetdir "bin/%{cfg.buildcfg}/stream/"
+    targetname "FileReader"
 
     local source = "src/"
     local include = "include/"
 
-    files (source .. "file_reader.c")
+    files { source .. "file_reader.c" }
+    includedirs (include)
+
+project "FileReaderMMap"
+    kind "StaticLib"
+    language "C"
+    targetdir "bin/%{cfg.buildcfg}/mmap/"
+    targetname "FileReaderMMap"
+    removeplatforms { "win64"}
+    defines { "POSIX_MMAP" }
+
+    local source = "src/"
+    local include = "include/"
+
+    files { source .. "file_reader.c" }
     includedirs (include)
 
 project "Tests"
     kind "ConsoleApp"
     language "C++"
-    links "File_Reader"
+    links "FileReader"
     targetdir "bin/tests/"
     targetname "test_%{cfg.shortname}"
     buildoptions "-std=c++11"
-
 
     local include  = "include/"
     local test_src = "tests/"
     local test_inc = "third_party/"
 
-    files (test_src .. "**.cpp")
+    files { 
+        test_src .. "**.cpp",
+    }
 
     includedirs { test_inc, include }
 
-    postbuildcommands ".././bin/%{cfg.architecture}/tests/test_%{cfg.shortname}"
+    postbuildcommands ".././bin/tests/test_%{cfg.shortname}"
+
+project "TestsMMAP"
+    kind "ConsoleApp"
+    language "C++"
+    links "FileReaderMMap"
+    targetdir "bin/tests/"
+    targetname "test_%{cfg.shortname}_MMap"
+    buildoptions "-std=c++11"
+
+    local include  = "include/"
+    local test_src = "tests/"
+    local test_inc = "third_party/"
+
+    files {
+        test_src .. "**.cpp",
+    }
+
+    includedirs { test_inc, include }
+
+    postbuildcommands ".././bin/tests/test_%{cfg.shortname}_MMap"
+
 
 project "Example"
     kind "ConsoleApp"
-    language "C"
-    links "File_Reader"
+    language "C++"
+    links "FileReaderMMap"
     targetdir "bin/example/"
     targetname "example"
 
     local source = "src/"
     local include = "include/"
 
-    files (source .. "example.c")
+    files (source .. "example.cpp")
     includedirs (include)
 
