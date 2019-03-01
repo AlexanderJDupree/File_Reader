@@ -111,7 +111,7 @@ File_Reader open_file(const char* file_path)
 	FILE* file = NULL;
     errno_t err = (is_file(file_path)) ? fopen_s(&file, file_path, "r") : 1;
 
-    if(err == 0)  // if fopen was successfull, parse the file
+    if(err == 0 && file != NULL)  // if fopen was successfull, parse the file
     {
         size = get_size(file);
 
