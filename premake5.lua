@@ -8,7 +8,7 @@
 -- WORKSPACE CONFIGURATION --
 workspace "File_Reader"
     configurations { "Debug", "Release" }
-    platforms { "POSIX_x64", "win64" }
+    platforms { "POSIX_x64", "Win64" }
 
     local project_action = "UNDEFINED"
     if _ACTION ~= nill then project_action = _ACTION end
@@ -20,8 +20,12 @@ workspace "File_Reader"
 
     -- PLATFORM CONFIGURATIONS --
     
-    filter { "platforms:win64" }
+    filter { "platforms:Win64" }
         system "Windows"
+        architecture "x64"
+        -- Windows SDK version
+        systemversion"10.0.17763.0"
+
 
     -- COMPILER/LINKER CONFIG --
     flags "FatalWarnings"
@@ -54,7 +58,7 @@ project "FileReaderMMap"
     language "C"
     targetdir "bin/%{cfg.buildcfg}"
     targetname "FileReaderMMap"
-    removeplatforms { "win64"}
+    removeplatforms { "Win64"}
     defines { "POSIX_MMAP" }
 
     local source = "src/"
@@ -89,6 +93,7 @@ project "TestsMMAP"
     links "FileReaderMMap"
     targetdir "bin/tests/"
     targetname "test_%{cfg.shortname}_MMap"
+    removeplatforms { "Win64"}
     buildoptions "-std=c++11"
 
     local include  = "include/"
@@ -107,7 +112,7 @@ project "TestsMMAP"
 project "Example"
     kind "ConsoleApp"
     language "C++"
-    links "FileReaderMMap"
+    links "FileReader"
     targetdir "bin/example/"
     targetname "example"
 

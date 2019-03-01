@@ -16,7 +16,8 @@ extern "C" {
     #include "file_reader.h"
 }
 
-const char* TEST_FILE = "/home/chaos2022/CFile_Reader/tests/test.txt";
+// Enter your test file location here!
+const char* TEST_FILE = "C:\\Users\\dupre\\Desktop\\File_Reader\\tests.txt";
 
 void open_write_file()
 {
@@ -38,9 +39,9 @@ int main()
     }
     else
     {
-        std::cout << "File: '"  << TEST_FILE << "was not found or was empty\n";
+        std::cout << "File: '"  << TEST_FILE << " was not found or was empty\n";
     }
-    
+
     return close_reader(&reader);
 }
 
