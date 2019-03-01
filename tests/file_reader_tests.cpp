@@ -23,6 +23,8 @@ extern "C" {
     #include "file_reader.h"
 }
 
+// TODO write a script to generate files of different sizes and have premake 
+// build those files before running tests
 const char* TEST_FILE = "/home/chaos2022/CFile_Reader/tests/test.txt";
 const char* EMPTY_FILE = "/home/chaos2022/CFile_Reader/tests/empty.txt";
 
@@ -31,57 +33,58 @@ long long get_seed()
     return std::chrono::high_resolution_clock::now().time_since_epoch().count();
 }
 
-char any_char()
+template <typename T>
+T any_val(long min, long max)
 {
     std::mt19937 generator(get_seed());
-    std::uniform_int_distribution<char> u_dist(1, CHAR_MAX);
+    std::uniform_int_distribution<T> u_dist(min, max);
     return u_dist(generator);
 }
 
-const char* open_write_file(int bytes)
+char* any_string(int length)
 {
-    // Opens file
-    std::ofstream file_stream(TEST_FILE);
-    REQUIRE(file_stream.is_open());
-
     // Generates random string
-    char* string = new char[bytes + 1];
-    for (int i = 0; i < bytes; ++i)
+    char* string = new char[length + 1];
+    for (int i = 0; i < length; ++i)
     {
-        string[i] = any_char();
+        string[i] = any_val<char>(1, CHAR_MAX);
     }
-    string[bytes + 1] = '\0';
-    
-    // Write and close
-    file_stream << string;
-    file_stream.close();
+    string[length] = '\0';
     return string;
 }
 
-void open_empty_file()
+const char* open_write_file(const char* file, int bytes)
 {
-    std::fstream empty_file;
-    empty_file.open(EMPTY_FILE, std::ios::out);
-    REQUIRE(empty_file.is_open());
-    empty_file.close();
+    std::ofstream file_stream(file);
+    REQUIRE(file_stream.is_open());
+
+    if(bytes > 0)
+    {
+        const char* string = any_string(bytes);
+        file_stream << string;
+        file_stream.close();
+        return string;
+    }
+    return NULL;
 }
 
 TEST_CASE("Determining a file size in bytes")
 {
     SECTION("test.txt size")
     {
-        const char* file_contents = open_write_file(22);
+        unsigned int bytes = any_val<unsigned int>(1, 1024);
+        const char* file_contents = open_write_file(TEST_FILE, bytes);
         File_Reader reader = open_file(TEST_FILE);
 
         REQUIRE(reader.contents != NULL);
-        REQUIRE(reader.size == 22);
+        REQUIRE(reader.size == bytes);
 
         close_reader(&reader);
         delete [] file_contents;
     }
     SECTION("empty_file")
     {
-        open_empty_file();
+        open_write_file(EMPTY_FILE, 0);
 
         File_Reader empty_file = open_file(EMPTY_FILE);
 
@@ -95,7 +98,8 @@ TEST_CASE("Reading a file into a char buffer")
 {
     SECTION("Read a valid file")
     {
-        const char* file_contents = open_write_file(22);
+        unsigned int bytes = any_val<unsigned int>(1, 1024);
+        const char* file_contents = open_write_file(TEST_FILE, bytes);
         File_Reader reader = open_file(TEST_FILE);
 
         std::string contents(reader.contents);
@@ -111,7 +115,7 @@ TEST_CASE("Reading a file into a char buffer")
     }
     SECTION("Read empty file")
     {
-        open_empty_file();
+        open_write_file(EMPTY_FILE, 0);
         File_Reader empty_reader = open_file(EMPTY_FILE);
 
         REQUIRE(empty_reader.contents == NULL);
