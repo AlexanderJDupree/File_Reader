@@ -1,6 +1,8 @@
 /*
  * File: file_reader.c
  *
+ * LICENSE: MIT
+ *
  * Author: Alexander DuPree
  *
  * https://github.com/AlexanderJDupree/File_Reader

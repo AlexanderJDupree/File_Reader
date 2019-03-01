@@ -6,16 +6,16 @@
  *
  * Author: Alexander DuPree
  *
+ * LICENSE: MIT
+ *
  * https://github.com/AlexanderJDupree/File_Reader
  *
  * Version: v0.2.0-alpha
+ *
  */
 
 #ifndef FILE_READER_H
 #define FILE_READER_H
-
-#include <stddef.h>
-#include <stdio.h>
 
 #include <stdio.h>
 #include <stddef.h>

@@ -4,6 +4,8 @@
  * Brief: Simple file reader utility that provides an easy and intuitive way to 
  *        load a file's contents into memory. 
  *
+ * LICENSE: MIT
+ *
  * Author: Alexander DuPree
  *
  * https://github.com/AlexanderJDupree/File_Reader
