@@ -6,4 +6,6 @@
 gmake/obj/
 bin/
 
+#Project File
+vs*/
 
