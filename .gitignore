@@ -7,5 +7,7 @@ gmake/obj/
 bin/
 
 #Project File
+gmake/
+gmake2/
 vs*/
 
