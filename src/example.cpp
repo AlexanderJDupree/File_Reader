@@ -17,7 +17,11 @@ extern "C" {
 }
 
 // Enter your test file location here!
+#if defined(_WIN64) || defined(_WIN32)
 const char* TEST_FILE = "C:\\Users\\dupre\\Desktop\\File_Reader\\tests.txt";
+#else
+const char* TEST_FILE = "/home/chaos2022/CFile_Reader/tests/test.txt";
+#endif
 
 void open_write_file()
 {

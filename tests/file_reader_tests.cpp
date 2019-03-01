@@ -24,9 +24,15 @@ extern "C" {
 }
 
 // TODO write a script to generate files of different sizes and have premake 
-// build those files before running tests
+// build those files and define their location on a platform basis
+
+#if defined(_WIN64) || defined(_WIN32)
+const char* TEST_FILE = "C:\\Users\\dupre\\Desktop\\File_Reader\\tests\\tests.txt";
+const char* EMPTY_FILE = "C:\\Users\\dupre\\Desktop\\File_Reader\\tests\\tests.txt";
+#else
 const char* TEST_FILE = "/home/chaos2022/CFile_Reader/tests/test.txt";
 const char* EMPTY_FILE = "/home/chaos2022/CFile_Reader/tests/empty.txt";
+#endif
 
 long long get_seed()
 {

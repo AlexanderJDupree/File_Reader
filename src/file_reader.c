@@ -27,10 +27,13 @@ size_t get_size(FILE* file)
     return size;
 }
 
-#if !defined(_WIN32) && !defined(_WIN64) && (defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__)))
+#if (defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__)))
+
+#include <unistd.h>
+
+#if defined(_POSIX_MAPPED_FILES)
 
 #include <fcntl.h>
-#include <unistd.h>
 #include <sys/mman.h>
 #include <sys/types.h>
 
@@ -73,9 +76,10 @@ int close_reader(File_Reader* reader)
     return 0;
 }
 
-#endif
+#endif // POSIX Compliant
+#endif // UNIX Based OS
 
-#ifdef _WIN64
+#if defined( _WIN64) || defined(_WIN32)
 
 int is_file(const char* file_path)
 {
@@ -134,4 +138,5 @@ int close_reader(File_Reader* reader)
     return 0;
 }
 
-#endif
+#endif // _WIN64 || _WIN32
+
