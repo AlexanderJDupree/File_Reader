@@ -45,10 +45,10 @@ premake5 gmake
 
 This will generate the GNU makefiles for this project. If you need specific project files run 'premake5 --help' for a list of supported actions. See the [Premake5](https://github.com/premake/premake-core) documentaion for further usage instructions.
 
-If the GNU makefiles suffice, then you can generate a File_Reader static library and unit tests by running:
+If the GNU makefiles suffice, then you can generate the File_Reader static library and unit tests by running:
 
 ```
-cd gmake && make
+cd gmake/ && make
 ```
 
 I've included a postbuild command in premake5.lua that will run the unit tests automatically, however if you want to rerun the tests they are located in bin/tests/.
