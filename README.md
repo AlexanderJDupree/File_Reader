@@ -55,7 +55,7 @@ I've included a postbuild command in premake5.lua that will run the unit tests a
 
 ## Built With
 
-* [Catch2](https://github.com/catchorg/Catch2) - Unit Testing framework
+* [Catch2](https://github.com/catchorg/Catch2) - Unit Testing framework used
 * [Premake5](https://github.com/premake/premake-core) - Build system
 
 ## License
